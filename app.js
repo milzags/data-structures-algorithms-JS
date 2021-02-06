@@ -42,3 +42,85 @@ function doubleArray(arr) {
 
 //newArr is getting longer and longer directly proportional to the input. Therefore this is O(n) space.
 
+// write a function that takes in a string and returns a count of each character in the string
+// steps -> create an empty dict to store the results
+// loop through the string via string index
+// check to see if the value at the string index position exists as a key in the dict
+// if it does, increment value (count) by 1. If not, set the key value to 1.
+
+function countLetters(string) {
+    let counted = {};
+    for (let i = 0; i < string.length; i++) {
+        if (!counted[string[i]]) {
+            counted[string[i]] = 1
+        } else {
+            counted[string[i]] += 1
+        }
+    }
+
+    return counted
+}
+// some additional changes can be made here such that it's taken into consideration whether the character is alpha numeric, ie. ignore spaces and symbols etc.
+
+//write a function called same which accepts two arrays. The function should return true if every value in the array has it's corresponding value squared in the second array. the frequency of values must be the same.
+
+const same = (arr1, arr2) => {
+    if (arr1.length !== arr2.length) {
+        return false;
+    }
+
+    let counter1 = {};
+    let counter2 = {};
+
+    for (let val of arr1) {
+        counter1[val] = (counter1[val] || 0) + 1
+    }
+
+    for (let val of arr2) {
+        counter2[val] = (counter2[val] || 0) + 1
+    }
+
+    for (let key in counter1) {
+        if (!(key ** 2) in counter2) {
+            return false
+        }
+
+        if (counter2[key ** 2] !== counter1[key]) {
+            return false;
+        }
+    }
+
+    return true;
+};
+
+//given two strings, write a function to determine if the second string is an anagram of the first. 
+
+function validAnagram(str1,str2){
+
+    if (str1.length !== str2.length) {
+        return false;
+    }
+
+    let lookup = {};
+
+    for (let i = 0; i < str1.length; i++){
+        let letter = str1[i];
+        if (!lookup[letter]) {
+            lookup[letter] = 1;
+        } else {
+            lookup[letter] += 1;
+        }
+    };
+
+    //console.log(lookup);
+
+    for (let i = 0; i < str1.length; i++) {
+        let letter = str2[i];
+        if (!lookup[letter]) {
+            return false;
+        } else {
+            lookup[letter] -= 1;
+        }
+    }
+    return true;
+}
