@@ -240,6 +240,7 @@ function averagePair(arr, val) {
 
 const isSubsequence = (str1, str2) => {
     //WIP
+
 }
 
 // Count unique values challenge - implement a function called countUniqueValues which accepts a sorted array, and counts the unique valies in the array. There can be negative numbers in the array but it will always be sorted. 
@@ -306,6 +307,30 @@ function maxSubSum(array, num) {
     return maxSum;
 }
 // this is a better solution since this is O(n) time complexity. 
+
+//write a function called minSubArrayLen which accepts two parameters - an array of positive integers and a positive integer. The function should return the minimal length of a contiguous subarray of which the sum is greater than or equal to the integer passed to the function. If there isn't one, return 0 instead. 
+
+function minSubArrayLen(arr, num) {
+    if (arr.length < num) {
+        return null;
+    }
+
+    let total = 0;
+
+    for (let i = 0; i < num; i++) {
+        total += arr[i];
+    }
+
+    let tempTotal = total;
+
+    for (let i = num; i < arr.length; i++) {
+        tempTotal = tempTotal - arr[i - num] + arr[i];
+        total = Math.max(total, tempTotal);
+    }
+
+   return total; 
+}
+
 
 // Divid and conquer - Given a sorted array of integers, write a function called search that accepts a value and returns the index where the value passed to the function is located. If the value is not found, return -1.
 
